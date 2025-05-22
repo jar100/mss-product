@@ -1,0 +1,10 @@
+brand:
+  - id: 1
+    name: A
+    deleted: false
+  - id: 2
+    name: B
+    deleted: false
+  - id: 3
+    name: C
+    deleted: true
