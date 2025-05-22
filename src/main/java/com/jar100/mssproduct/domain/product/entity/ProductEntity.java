@@ -10,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +22,14 @@ import org.hibernate.annotations.SQLRestriction;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "product")
+@Table(
+    name = "product",
+    indexes = {
+        @Index(name = "idx_product_category_price", columnList = "category,price"),
+        @Index(name = "idx_product_brand_price",    columnList = "brand_id,price"),
+        @Index(name = "idx_product_brand_category", columnList = "brand_id,category")
+    }
+)
 @SQLDelete(sql = "UPDATE product SET deleted = true WHERE id = ?")
 @SQLRestriction("deleted = false")
 @Getter
