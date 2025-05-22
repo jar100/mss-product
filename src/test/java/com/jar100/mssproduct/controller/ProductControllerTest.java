@@ -49,7 +49,7 @@ class ProductControllerTest {
             .build();
         when(productService.create(any(ProductCreation.class))).thenReturn(info);
 
-        mockMvc.perform(post("/api/products")
+        mockMvc.perform(post("/api/v1/products")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(req)))
             .andExpect(status().isOk())
@@ -71,7 +71,7 @@ class ProductControllerTest {
             .build();
         when(productService.update(any(ProductUpdate.class))).thenReturn(info);
 
-        mockMvc.perform(put("/api/products/5")
+        mockMvc.perform(put("/api/v1/products/5")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(req)))
             .andExpect(status().isOk())
@@ -83,7 +83,7 @@ class ProductControllerTest {
     void deleteProduct_shouldReturnSuccessResponse() throws Exception {
         doNothing().when(productService).delete(5L);
 
-        mockMvc.perform(delete("/api/products/5"))
+        mockMvc.perform(delete("/api/v1/products/5"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.result").value("SUCCESS"));
     }

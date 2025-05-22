@@ -49,7 +49,7 @@ class BrandControllerTest {
             .build();
         when(brandService.create(any(BrandCreation.class))).thenReturn(info);
 
-        mockMvc.perform(post("/api/brands")
+        mockMvc.perform(post("/api/v1/brands")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(req)))
             .andExpect(status().isOk())
@@ -67,7 +67,7 @@ class BrandControllerTest {
             .build();
         when(brandService.update(any(BrandUpdate.class))).thenReturn(info);
 
-        mockMvc.perform(put("/api/brands/2")
+        mockMvc.perform(put("/api/v1/brands/2")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(req)))
             .andExpect(status().isOk())
@@ -80,7 +80,7 @@ class BrandControllerTest {
     void deleteBrand_shouldReturnSuccessResponse() throws Exception {
         doNothing().when(brandService).delete(3L);
 
-        mockMvc.perform(delete("/api/brands/3"))
+        mockMvc.perform(delete("/api/v1/brands/3"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.result").value("SUCCESS"))
             .andExpect(jsonPath("$.data").doesNotExist());
@@ -94,7 +94,7 @@ class BrandControllerTest {
         );
         when(brandService.listAll()).thenReturn(infos);
 
-        mockMvc.perform(get("/api/brands"))
+        mockMvc.perform(get("/api/v1/brands"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.result").value("SUCCESS"))
             .andExpect(jsonPath("$.data[0].id").value(1))

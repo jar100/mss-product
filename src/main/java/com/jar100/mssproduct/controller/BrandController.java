@@ -22,7 +22,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/brands")
+@RequestMapping("/api/v1/brands")
 public class BrandController {
     private final BrandService service;
     private final BrandControllerMapper mapper;
