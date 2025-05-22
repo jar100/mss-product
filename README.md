@@ -78,13 +78,8 @@ java -jar backend/build/libs/mss-product-0.0.1-SNAPSHOT.jar
 
 ---
 
-## 🎁 기타 추가 정보
-
-* Swagger UI: `/swagger-ui.html` (설정 시)
-* Profile: `dev`/`prod` 구분 가능 (`application-dev.yaml`, `application-prod.yaml`)
-* CI/CD: GitHub Actions, Dockerfile 템플릿 포함
-* Frontend: `frontend/` 폴더에 React/Vue 프로젝트 추가 가능
-
+## 기타 추가 정보
+todo
 ---
 
-> 이 README는 과제 요구사항과 설계 배경, 실행 방법을 명확히 전달하기 위해 구성되었습니다.
+
