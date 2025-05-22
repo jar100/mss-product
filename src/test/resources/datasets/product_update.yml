@@ -1,0 +1,42 @@
+brand:
+  - id: 1
+    name: A
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+  - id: 2
+    name: B
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+  - id: 3
+    name: C
+    deleted: true
+    created_at: 2025-05-22 00:00:00
+product:
+  - id: 1
+    name: Product A
+    brand_id: 1
+    category: TOP
+    price: 100.0
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+  - id: 2
+    name: Product B
+    brand_id: 2
+    category: OUTER
+    price: 500.0
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+  - id: 3
+    name: Product C
+    brand_id: 3
+    price: 10110.0
+    category: PANTS
+    deleted: true
+    created_at: 2025-05-22 00:00:00
+  - id: 10
+    name: Product B
+    brand_id: 2
+    category: OUTER
+    price: 500.0
+    deleted: false
+    created_at: 2025-05-22 00:00:00

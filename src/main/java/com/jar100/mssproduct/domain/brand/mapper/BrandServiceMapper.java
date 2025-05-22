@@ -8,11 +8,9 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring",
     config = CommonMapperConfig.class)
-public interface BrandMapper {
+public interface BrandServiceMapper {
 
     BrandInfo toDto(BrandEntity entity);
 
     BrandEntity toEntity(BrandCreation creation);
-
-
 }

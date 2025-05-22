@@ -2,9 +2,12 @@ brand:
   - id: 1
     name: A
     deleted: false
+    created_at: 2025-05-22 00:00:00
   - id: 2
     name: B
     deleted: false
+    created_at: 2025-05-22 00:00:00
   - id: 3
     name: C
     deleted: true
+    created_at: 2025-05-22 00:00:00
