@@ -2,7 +2,7 @@ package com.jar100.mssproduct.controller;
 
 import com.jar100.mssproduct.common.dto.CommonResponse;
 import com.jar100.mssproduct.controller.dto.BrandCreateRequest;
-import com.jar100.mssproduct.controller.dto.BrandResponse;
+import com.jar100.mssproduct.controller.dto.BrandDto;
 import com.jar100.mssproduct.controller.dto.BrandUpdateRequest;
 import com.jar100.mssproduct.controller.mapper.BrandControllerMapper;
 import com.jar100.mssproduct.domain.brand.dto.BrandInfo;
@@ -28,14 +28,14 @@ public class BrandController {
     private final BrandControllerMapper mapper;
 
     @PostMapping
-    public CommonResponse<BrandResponse> create(
+    public CommonResponse<BrandDto> create(
         @RequestBody @Valid BrandCreateRequest request) {
         BrandInfo info = service.create(mapper.toDto(request));
         return CommonResponse.success(mapper.toResponse(info));
     }
 
     @PutMapping("/{id}")
-    public CommonResponse<BrandResponse> update(
+    public CommonResponse<BrandDto> update(
         @PathVariable Long id,
         @RequestBody @Valid BrandUpdateRequest request
     ) {
@@ -50,9 +50,9 @@ public class BrandController {
     }
 
     @GetMapping
-    public CommonResponse<List<BrandResponse>> listAll() {
+    public CommonResponse<List<BrandDto>> listAll() {
         List<BrandInfo> list = service.listAll();
-        List<BrandResponse> resp = list.stream()
+        List<BrandDto> resp = list.stream()
             .map(mapper::toResponse)
             .toList();
         return CommonResponse.success(resp);

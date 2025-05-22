@@ -2,7 +2,7 @@ package com.jar100.mssproduct.controller.mapper;
 
 import com.jar100.mssproduct.config.CommonMapperConfig;
 import com.jar100.mssproduct.controller.dto.BrandCreateRequest;
-import com.jar100.mssproduct.controller.dto.BrandResponse;
+import com.jar100.mssproduct.controller.dto.BrandDto;
 import com.jar100.mssproduct.controller.dto.BrandUpdateRequest;
 import com.jar100.mssproduct.domain.brand.dto.BrandCreation;
 import com.jar100.mssproduct.domain.brand.dto.BrandInfo;
@@ -16,5 +16,5 @@ public interface BrandControllerMapper {
 
     BrandUpdate toDto(Long id, BrandUpdateRequest request);
 
-    BrandResponse toResponse(BrandInfo info);
+    BrandDto toResponse(BrandInfo info);
 }

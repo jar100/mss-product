@@ -1,11 +1,8 @@
-package com.jar100.mssproduct.domain.brand.dto;
-
-import lombok.Builder;
+package com.jar100.mssproduct.controller.dto;
 
 import java.time.LocalDateTime;
 
-@Builder
-public record BrandInfo(
+public record BrandDto(
     Long id,
     String name,
     LocalDateTime createdAt,
