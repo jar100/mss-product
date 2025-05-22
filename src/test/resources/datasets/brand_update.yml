@@ -1,0 +1,4 @@
+brand:
+  - id: 1
+    name: oldName
+    deleted: false
