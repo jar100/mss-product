@@ -3,7 +3,7 @@ package com.jar100.mssproduct.domain.product.repository;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.junit5.api.DBRider;
-import com.jar100.mssproduct.domain.product.dto.Category;
+import com.jar100.mssproduct.common.dto.Category;
 import com.jar100.mssproduct.domain.product.entity.ProductEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

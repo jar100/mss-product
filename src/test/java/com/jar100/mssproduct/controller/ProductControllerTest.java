@@ -3,7 +3,7 @@ package com.jar100.mssproduct.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jar100.mssproduct.controller.dto.ProductCreateRequest;
 import com.jar100.mssproduct.controller.dto.ProductUpdateRequest;
-import com.jar100.mssproduct.domain.product.dto.Category;
+import com.jar100.mssproduct.common.dto.Category;
 import com.jar100.mssproduct.domain.product.dto.ProductCreation;
 import com.jar100.mssproduct.domain.product.dto.ProductInfo;
 import com.jar100.mssproduct.domain.product.dto.ProductUpdate;

@@ -1,7 +1,7 @@
 package com.jar100.mssproduct.domain.product.entity;
 
 import com.jar100.mssproduct.common.entity.BaseEntity;
-import com.jar100.mssproduct.domain.product.dto.Category;
+import com.jar100.mssproduct.common.dto.Category;
 import com.jar100.mssproduct.domain.product.dto.ProductUpdate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

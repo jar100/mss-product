@@ -1,6 +1,6 @@
 package com.jar100.mssproduct.controller.dto;
 
-import com.jar100.mssproduct.domain.product.dto.Category;
+import com.jar100.mssproduct.common.dto.Category;
 
 import java.math.BigDecimal;
 
