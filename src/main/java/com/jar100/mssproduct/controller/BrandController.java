@@ -28,16 +28,13 @@ public class BrandController {
     private final BrandControllerMapper mapper;
 
     @PostMapping
-    public CommonResponse<BrandDto> create(
-        @RequestBody @Valid BrandCreateRequest request) {
+    public CommonResponse<BrandDto> create(@RequestBody @Valid BrandCreateRequest request) {
         BrandInfo info = service.create(mapper.toDto(request));
         return CommonResponse.success(mapper.toResponse(info));
     }
 
     @PutMapping("/{id}")
-    public CommonResponse<BrandDto> update(
-        @PathVariable Long id,
-        @RequestBody @Valid BrandUpdateRequest request
+    public CommonResponse<BrandDto> update(@PathVariable Long id, @RequestBody @Valid BrandUpdateRequest request
     ) {
         BrandInfo info = service.update(mapper.toDto(id, request));
         return CommonResponse.success(mapper.toResponse(info));

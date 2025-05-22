@@ -5,7 +5,7 @@ import com.jar100.mssproduct.domain.brand.dto.BrandCreation;
 import com.jar100.mssproduct.domain.brand.dto.BrandInfo;
 import com.jar100.mssproduct.domain.brand.dto.BrandUpdate;
 import com.jar100.mssproduct.domain.brand.entity.BrandEntity;
-import com.jar100.mssproduct.domain.brand.mapper.BrandMapper;
+import com.jar100.mssproduct.domain.brand.mapper.BrandServiceMapper;
 import com.jar100.mssproduct.domain.brand.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 @Service
 public class BrandServiceImpl implements BrandService {
     private final BrandRepository brandRepository;
-    private final BrandMapper brandMapper;
+    private final BrandServiceMapper brandMapper;
 
     @Override
     public BrandInfo create(BrandCreation creation) {
-        BrandEntity entity = BrandEntity.builder().name(creation.name()).build();
+        BrandEntity entity = brandMapper.toEntity(creation);
         brandRepository.save(entity);
         return brandMapper.toDto(entity);
     }

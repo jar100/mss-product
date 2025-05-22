@@ -2,6 +2,8 @@ package com.jar100.mssproduct.domain.product.entity;
 
 import com.jar100.mssproduct.common.entity.BaseEntity;
 import com.jar100.mssproduct.domain.product.dto.Category;
+import com.jar100.mssproduct.domain.product.dto.ProductUpdate;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -33,20 +35,35 @@ public class ProductEntity extends BaseEntity {
 
     private String name;
 
+    @Column(name = "brand_id", nullable = false)
     private Long brandId;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "varchar(100)")
     private Category category;
 
+    @Column(nullable = false)
     private BigDecimal price;
 
     @Builder.Default
     private boolean deleted = false;
 
-    public void change(String name, Long brandId, Category category, BigDecimal price) {
-        this.name = name;
-        this.brandId = brandId;
-        this.category = category;
-        this.price = price;
+    public void change(ProductUpdate update) {
+        // name
+        if (update.name() != null) {
+            this.name = update.name();
+        }
+        // brandId
+        if (update.brandId() != null) {
+            this.brandId = update.brandId();
+        }
+        // category
+        if (update.category() != null) {
+            this.category = update.category();
+        }
+        // price
+        if (update.price() != null && update.price() > 0) {
+            this.price = BigDecimal.valueOf(update.price());
+        }
     }
 }

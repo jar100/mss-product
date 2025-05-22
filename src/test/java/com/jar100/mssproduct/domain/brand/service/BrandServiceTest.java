@@ -66,9 +66,15 @@ class BrandServiceTest {
         // then
         assertThat(updated.id()).isEqualTo(update.id());
         assertThat(updated.name()).isEqualTo(update.name());
+        assertThat(updated.createdAt()).isNotNull();
+        assertThat(updated.updatedAt()).isNotNull();
 
         BrandEntity entity = brandRepository.findById(update.id()).get();
         assertThat(entity.getName()).isEqualTo("NewName");
+        assertThat(entity.getCreatedAt()).isNotNull();
+        assertThat(entity.getUpdatedAt()).isNotNull();
+        assertThat(entity.getUpdatedAt()).isAfter(entity.getCreatedAt());
+
     }
 
     @Test
