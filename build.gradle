@@ -1,0 +1,78 @@
+plugins {
+    id 'org.springframework.boot' version '3.4.4'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'java'
+}
+
+group = 'com.jar100.mss-product'
+version = '0.0.1-SNAPSHOT'
+
+def querydslVersion = '5.1.0'
+def mapstructVersion = '1.5.5.Final'
+def lombokMapstructBindingVersion = '0.2.0'
+def slf4jVersion = '2.0.7'
+def databaseRiderVersion = '1.42.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    all {
+        exclude group: 'commons-logging', module: 'commons-logging'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Lombok
+    compileOnly("org.projectlombok:lombok")
+    testCompileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}")
+
+    // mapstruct
+    implementation("org.mapstruct:mapstruct:${mapstructVersion}")
+    annotationProcessor("org.mapstruct:mapstruct-processor:${mapstructVersion}")
+
+    // querydsl
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+
+    implementation("com.querydsl:querydsl-jpa:${querydslVersion}:jakarta")
+    annotationProcessor("com.querydsl:querydsl-apt:${querydslVersion}:jakarta")
+
+    // Logging
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+
+    // H2
+    runtimeOnly 'com.h2database:h2'
+
+    // Testing
+    // TEST
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude module: "junit"
+        exclude module: "junit-vintage-engine"
+    }
+    testImplementation("com.h2database:h2")
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation("com.github.database-rider:rider-junit5:${databaseRiderVersion}")
+    testImplementation("org.mockito:mockito-inline:5.2.0")
+}
+
+test {
+    useJUnitPlatform()
+}
