@@ -31,7 +31,7 @@
 * **조인 조회**: QueryDSL을 활용하여 projection DTO로 결과 반환
 * **캐싱 전략**: 상품 조회 API 성능 최적화를 위해 Spring Cache(Ehcache) 적용
 
-
+ 
 ---
 
 ## 코드 빌드 · 테스트 · 실행 방법
