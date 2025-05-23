@@ -1,5 +1,6 @@
 package com.jar100.mssproduct.domain.product.service;
 
+import com.jar100.mssproduct.common.dto.ProductChangedEvent;
 import com.jar100.mssproduct.common.exception.ProductNotFoundException;
 import com.jar100.mssproduct.domain.product.dto.ProductCreation;
 import com.jar100.mssproduct.domain.product.dto.ProductInfo;
@@ -8,6 +9,7 @@ import com.jar100.mssproduct.domain.product.entity.ProductEntity;
 import com.jar100.mssproduct.domain.product.mapper.ProductServiceMapper;
 import com.jar100.mssproduct.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final ApplicationEventPublisher publisher;
     private final ProductServiceMapper productServiceMapper;
 
     @Override
@@ -22,7 +25,12 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity entity = productServiceMapper.toEntity(creation);
         productRepository.save(entity);
         //event publish 최저가 변경
-
+        publisher.publishEvent(ProductChangedEvent.builder()
+            .productId(entity.getId())
+            .brandId(entity.getBrandId())
+            .category(entity.getCategory())
+            .price(entity.getPrice())
+            .build());
         return productServiceMapper.toDto(entity);
     }
 
@@ -40,6 +48,12 @@ public class ProductServiceImpl implements ProductService {
         entity.change(productUpdate);
 
         //event publish 최저가 변경
+        publisher.publishEvent(ProductChangedEvent.builder()
+            .productId(entity.getId())
+            .brandId(entity.getBrandId())
+            .category(entity.getCategory())
+            .price(entity.getPrice())
+            .build());
         return productServiceMapper.toDto(productRepository.save(entity));
     }
 
@@ -50,5 +64,9 @@ public class ProductServiceImpl implements ProductService {
         }
         productRepository.deleteById(id);
         //event publish 최저가 변경
+        publisher.publishEvent(ProductChangedEvent.builder()
+            .productId(id)
+            .type(ProductChangedEvent.Type.DELETE)
+            .build());
     }
 }

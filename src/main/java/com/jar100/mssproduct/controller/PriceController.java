@@ -45,6 +45,7 @@ public class PriceController {
         return CommonResponse.success(priceControllerMapper.toResponse(priceRangeByCategory));
     }
 
+    //임시 호출 용
     @GetMapping("/batch")
     public CommonResponse<Void> batch() {
         summaryBatchService.refreshSummaries();
