@@ -1,0 +1,72 @@
+### 1. Create Brand
+@api = http://localhost:8080
+
+POST {{api}}/api/v1/brands
+Content-Type: application/json
+
+{
+  "name": "A"
+}
+
+### 2. Get All Brands
+
+GET {{api}}/api/v1/brands
+
+### 3. Get Brand by ID
+
+GET {{api}}/api/v1/brands/1
+
+### 4. Update Brand
+
+PUT {{api}}/api/v1/brands/1
+Content-Type: application/json
+
+{
+  "name": "A-updated"
+}
+
+### 5. Delete Brand (soft)
+
+DELETE {{api}}/api/v1/brands/1
+
+### 6. Create Product
+
+POST {{api}}/api/v1/products
+Content-Type: application/json
+
+{
+  "name": "TOP_A111",
+  "brandId": 1,
+  "category": "TOP",
+  "price": 11200
+}
+
+### 7. Get Product by ID
+
+GET {{api}}/api/v1/products/73
+
+### 8. Update Product
+
+PUT {{api}}/api/v1/products/73
+Content-Type: application/json
+
+{
+  "name": "TOP22_A_v2",
+  "price": 11500
+}
+
+### 9. Delete Product (soft)
+
+DELETE {{api}}/api/v1/products/101
+
+### 10. Get Category Lowest Prices
+
+GET {{api}}/api/v1/prices/categories/lowest
+
+### 11. Get Single Brand Lowest Total
+
+GET {{api}}/api/v1/prices/brands/lowest-total
+
+### 12. Get Category Price Range
+
+GET {{api}}/api/v1/prices/categories/OUTER/range
