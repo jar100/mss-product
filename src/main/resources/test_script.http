@@ -43,16 +43,16 @@ Content-Type: application/json
 
 ### 7. Get Product by ID
 
-GET {{api}}/api/v1/products/73
+GET {{api}}/api/v1/products/48
 
 ### 8. Update Product
 
-PUT {{api}}/api/v1/products/73
+PUT {{api}}/api/v1/products/48
 Content-Type: application/json
 
 {
   "name": "TOP22_A_v2",
-  "price": 11500
+  "price": 20000
 }
 
 ### 9. Delete Product (soft)

@@ -408,37 +408,37 @@ INSERT INTO brand_category_min_price_summary
 VALUES (9, 'TOP', '2025-05-23 22:45:35.292832', '2025-05-23 22:45:35.292832', 11400, 65, 0);
 
 INSERT INTO category_price_summary
-    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id)
-VALUES ('TOP', now(), now(), 9, 11400, 65, 3, 10000, 17);
+    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id, version)
+VALUES ('TOP', now(), now(), 9, 11400, 65, 3, 10000, 17, 0);
 
 INSERT INTO category_price_summary
-    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id)
-VALUES ('OUTER', now(), now(), 6, 7200, 42, 5, 5000, 34);
+    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id, version)
+VALUES ('OUTER', now(), now(), 6, 7200, 42, 5, 5000, 34, 0);
 
 INSERT INTO category_price_summary
-    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id)
-VALUES ('PANTS', now(), now(), 1, 4200, 3, 4, 3000, 27);
+    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id, version)
+VALUES ('PANTS', now(), now(), 1, 4200, 3, 4, 3000, 27, 0);
 
 INSERT INTO category_price_summary
-    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id)
-VALUES ('SNEAKERS', now(), now(), 5, 9900, 36, 1, 9000, 4);
+    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id, version)
+VALUES ('SNEAKERS', now(), now(), 5, 9900, 36, 1, 9000, 4, 0);
 
 INSERT INTO category_price_summary
-    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id)
-VALUES ('BAG', now(), now(), 4, 2500, 29, 1, 2000, 5);
+    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id, version)
+VALUES ('BAG', now(), now(), 4, 2500, 29, 1, 2000, 5, 0);
 
 INSERT INTO category_price_summary
-    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id)
-VALUES ('HAT', now(), now(), 2, 2000, 14, 4, 1500, 30);
+    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id, version)
+VALUES ('HAT', now(), now(), 2, 2000, 14, 4, 1500, 30, 0);
 
 INSERT INTO category_price_summary
-    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id)
-VALUES ('SOCKS', now(), now(), 4, 2400, 31, 9, 1700, 71);
+    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id, version)
+VALUES ('SOCKS', now(), now(), 4, 2400, 31, 9, 1700, 71, 0);
 
 INSERT INTO category_price_summary
-    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id)
-VALUES ('ACCESSORY', now(), now(), 9, 2400, 72, 6, 1900, 48);
+    (category, created_at, updated_at, max_brand_id, max_price, max_product_id, min_brand_id, min_price, min_product_id, version)
+VALUES ('ACCESSORY', now(), now(), 9, 2400, 72, 6, 1900, 48,    0);
 
 INSERT INTO brand_total_summary
-    (id, min_brand_id, created_at, updated_at, total_price)
-VALUES (1, 4, now(), now(), 36100);
+    (id, min_brand_id, created_at, updated_at, total_price, version)
+VALUES (1, 4, now(), now(), 36100, 0);

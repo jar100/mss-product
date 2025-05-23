@@ -59,13 +59,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delete(Long id) {
-        if (!productRepository.existsById(id)) {
-            throw new ProductNotFoundException("Product not found: " + id);
-        }
+        ProductEntity productEntity = productRepository.findById(id)
+            .orElseThrow(() -> new ProductNotFoundException("Product not found: " + id));
         productRepository.deleteById(id);
         //event publish 최저가 변경
         publisher.publishEvent(ProductChangedEvent.builder()
-            .productId(id)
+            .productId(productEntity.getId())
+            .brandId(productEntity.getBrandId())
+            .category(productEntity.getCategory())
+            .price(productEntity.getPrice())
             .type(ProductChangedEvent.Type.DELETE)
             .build());
     }

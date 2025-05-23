@@ -9,7 +9,7 @@ import com.jar100.mssproduct.domain.summary.dto.BrandTotalPrice;
 import com.jar100.mssproduct.domain.summary.dto.CategoryMinPrice;
 import com.jar100.mssproduct.domain.summary.dto.CategoryPriceRange;
 import com.jar100.mssproduct.domain.summary.service.PriceService;
-import com.jar100.mssproduct.domain.summary.service.SummaryBatchService;
+import com.jar100.mssproduct.domain.summary.service.SummaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +25,7 @@ public class PriceController {
     private final PriceService priceService;
     private final PriceControllerMapper priceControllerMapper;
 
-    private final SummaryBatchService summaryBatchService;
+    private final SummaryService summaryBatchService;
 
     @GetMapping("/categories/lowest")
     public CommonResponse<List<CategoryMinPriceResponse>> findLowesByCategories() {
