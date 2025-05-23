@@ -48,4 +48,13 @@ public class CategoryPriceSummaryEntity extends BaseEntity {
     @Version
     @Column(name = "version")
     private Long version;
+
+    public void updateMinMaxPrice(Long minBrandId, Long minProductId, Integer minPrice, Long maxBrandId, Long maxProductId, Integer maxPrice) {
+        this.minBrandId = minBrandId;
+        this.minProductId = minProductId;
+        this.minPrice = minPrice;
+        this.maxBrandId = maxBrandId;
+        this.maxProductId = maxProductId;
+        this.maxPrice = maxPrice;
+    }
 }

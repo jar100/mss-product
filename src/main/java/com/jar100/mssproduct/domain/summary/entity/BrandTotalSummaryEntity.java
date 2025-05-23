@@ -40,4 +40,8 @@ public class BrandTotalSummaryEntity extends BaseEntity {
         this.minBrandId = minBrandId;
         this.totalPrice = totalPrice;
     }
+
+    public void updateTotalPrice(Integer totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }
