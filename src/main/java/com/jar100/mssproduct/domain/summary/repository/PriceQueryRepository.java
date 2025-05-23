@@ -1,8 +1,8 @@
-package com.jar100.mssproduct.domain.price.repository;
+package com.jar100.mssproduct.domain.summary.repository;
 
-import com.jar100.mssproduct.domain.price.dto.BrandTotalPrice;
-import com.jar100.mssproduct.domain.price.dto.CategoryMinPrice;
-import com.jar100.mssproduct.domain.price.dto.CategoryPriceRange;
+import com.jar100.mssproduct.domain.summary.dto.BrandTotalPrice;
+import com.jar100.mssproduct.domain.summary.dto.CategoryMinPrice;
+import com.jar100.mssproduct.domain.summary.dto.CategoryPriceRange;
 
 import java.util.List;
 

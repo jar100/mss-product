@@ -1,19 +1,21 @@
-package com.jar100.mssproduct.domain.price.dto;
+package com.jar100.mssproduct.domain.summary.dto;
 
 import com.jar100.mssproduct.controller.dto.CategoryPriceRangeResponse;
 import lombok.Builder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+@Builder
 public record CategoryPriceRange(
     String category,
-    List<CategoryPriceRangeResponse.BrandPrice> min,
-    List<CategoryPriceRangeResponse.BrandPrice> max
+    List<BrandPrice> min,
+    List<BrandPrice> max
 ) {
     @Builder
     public record BrandPrice(
         String brand,
-        Integer price
+        BigDecimal price
     ) {
     }
 }

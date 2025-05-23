@@ -1,9 +1,14 @@
 package com.jar100.mssproduct.controller;
 
 import com.jar100.mssproduct.common.dto.CommonResponse;
+import com.jar100.mssproduct.controller.dto.BrandTotalPriceResponse;
 import com.jar100.mssproduct.controller.dto.CategoryMinPriceResponse;
+import com.jar100.mssproduct.controller.dto.CategoryPriceRangeResponse;
 import com.jar100.mssproduct.controller.mapper.PriceControllerMapper;
-import com.jar100.mssproduct.domain.price.service.PriceService;
+import com.jar100.mssproduct.domain.summary.dto.BrandTotalPrice;
+import com.jar100.mssproduct.domain.summary.dto.CategoryMinPrice;
+import com.jar100.mssproduct.domain.summary.dto.CategoryPriceRange;
+import com.jar100.mssproduct.domain.summary.service.PriceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,21 +26,20 @@ public class PriceController {
 
     @GetMapping("/categories/lowest")
     public CommonResponse<List<CategoryMinPriceResponse>> findLowesByCategories() {
-
-        //return CommonResponse.success(priceControllerMapper.toResponse(priceService.findLowestByCategories()))
-        return null;
+        List<CategoryMinPrice> categoryMinPrices = priceService.findMinPriceByCategory();
+        return CommonResponse.success(priceControllerMapper.toResponse(categoryMinPrices));
     }
 
     @GetMapping("/brands/lowest-total")
-    public CommonResponse<List<CategoryMinPriceResponse>> findLowestByBrands() {
-        //return CommonResponse.success(priceControllerMapper.toResponse(priceService.findLowestByBrands()));
-        return null;
+    public CommonResponse<BrandTotalPriceResponse> findLowestByBrands() {
+        BrandTotalPrice lowestTotalByBrand = priceService.findLowestTotalByBrand();
+        return CommonResponse.success(priceControllerMapper.toResponse(lowestTotalByBrand));
     }
 
     @GetMapping("/categories/{categoryName}/range")
-    public CommonResponse<CategoryMinPriceResponse> findRangeByCategory(@PathVariable String categoryName) {
-        //return CommonResponse.success(priceControllerMapper.toResponse(priceService.findRangeByCategory(categoryName)));
-        return null;
+    public CommonResponse<CategoryPriceRangeResponse> findRangeByCategory(@PathVariable String categoryName) {
+        CategoryPriceRange priceRangeByCategory = priceService.findPriceRangeByCategory(categoryName);
+        return CommonResponse.success(priceControllerMapper.toResponse(priceRangeByCategory));
     }
 
 }

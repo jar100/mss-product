@@ -2,6 +2,7 @@ package com.jar100.mssproduct.controller.dto;
 
 import lombok.Builder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Builder
@@ -13,7 +14,7 @@ public record CategoryPriceRangeResponse(
     @Builder
     public record BrandPrice(
         String brand,
-        Integer price
+        BigDecimal price
     ) {
     }
 }

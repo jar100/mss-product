@@ -1,0 +1,130 @@
+category_price_summary:
+  - category: TOP
+    version: 1
+    min_brand_id: 3
+    min_product_id: 17
+    min_price: 10000
+    max_brand_id: 1
+    max_product_id: 1
+    max_price: 11200
+    created_at: 2025-05-23 00:00:00
+  - category: OUTER
+    version: 1
+    min_brand_id: 5
+    min_product_id: 34
+    min_price: 5000
+    max_brand_id: 9
+    max_product_id: 66
+    max_price: 6700
+    created_at: 2025-05-23 00:00:00
+  - category: PANTS
+    version: 1
+    min_brand_id: 4
+    min_product_id: 27
+    min_price: 3000
+    max_brand_id: 1
+    max_product_id: 3
+    max_price: 4200
+    created_at: 2025-05-23 00:00:00
+  - category: SNEAKERS
+    version: 1
+    min_brand_id: 1
+    min_product_id: 4
+    min_price: 9000
+    max_brand_id: 9
+    max_product_id: 68
+    max_price: 10000
+    created_at: 2025-05-23 00:00:00
+  - category: BAG
+    version: 1
+    min_brand_id: 1
+    min_product_id: 5
+    min_price: 2000
+    max_brand_id: 9
+    max_product_id: 69
+    max_price: 3000
+    created_at: 2025-05-23 00:00:00
+  - category: HAT
+    version: 1
+    min_brand_id: 4
+    min_product_id: 30
+    min_price: 1500
+    max_brand_id: 2
+    max_product_id: 14
+    max_price: 2000
+    created_at: 2025-05-23 00:00:00
+  - category: SOCKS
+    version: 1
+    min_brand_id: 1
+    min_product_id: 7
+    min_price: 1800
+    max_brand_id: 9
+    max_product_id: 71
+    max_price: 2900
+    created_at: 2025-05-23 00:00:00
+  - category: ACCESSORY
+    version: 1
+    min_brand_id: 3
+    min_product_id: 24
+    min_price: 2100
+    max_brand_id: 9
+    max_product_id: 72
+    max_price: 3000
+    created_at: 2025-05-23 00:00:00
+
+brand_category_min_price_summary:
+  - brand_id: 4
+    category: TOP
+    version: 1
+    min_product_id: 25
+    min_price: 10100
+    created_at: 2025-05-23 00:00:00
+  - brand_id: 4
+    category: OUTER
+    version: 1
+    min_product_id: 26
+    min_price: 5100
+    created_at: 2025-05-23 00:00:00
+  - brand_id: 4
+    category: PANTS
+    version: 1
+    min_product_id: 27
+    min_price: 3000
+    created_at: 2025-05-23 00:00:00
+  - brand_id: 4
+    category: SNEAKERS
+    version: 1
+    min_product_id: 28
+    min_price: 9500
+    created_at: 2025-05-23 00:00:00
+  - brand_id: 4
+    category: BAG
+    version: 1
+    min_product_id: 29
+    min_price: 2500
+    created_at: 2025-05-23 00:00:00
+  - brand_id: 4
+    category: HAT
+    version: 1
+    min_product_id: 30
+    min_price: 1500
+    created_at: 2025-05-23 00:00:00
+  - brand_id: 4
+    category: SOCKS
+    version: 1
+    min_product_id: 31
+    min_price: 2400
+    created_at: 2025-05-23 00:00:00
+  - brand_id: 4
+    category: ACCESSORY
+    version: 1
+    min_product_id: 32
+    min_price: 2500
+    created_at: 2025-05-23 00:00:00
+
+brand_total_summary:
+  - id: 1
+    version: 1
+    min_brand_id: 4
+    total_price: 36100
+    created_at: 2025-05-23 00:00:00
