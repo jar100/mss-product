@@ -52,7 +52,7 @@ Content-Type: application/json
 
 {
   "name": "TOP22_A_v2",
-  "price": 20000
+  "price": 220000
 }
 
 ### 9. Delete Product (soft)

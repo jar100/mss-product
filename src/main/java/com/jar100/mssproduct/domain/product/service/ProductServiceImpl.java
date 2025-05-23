@@ -30,6 +30,7 @@ public class ProductServiceImpl implements ProductService {
             .brandId(entity.getBrandId())
             .category(entity.getCategory())
             .price(entity.getPrice())
+            .type(ProductChangedEvent.Type.CREATE)
             .build());
         return productServiceMapper.toDto(entity);
     }
@@ -53,6 +54,7 @@ public class ProductServiceImpl implements ProductService {
             .brandId(entity.getBrandId())
             .category(entity.getCategory())
             .price(entity.getPrice())
+            .type(ProductChangedEvent.Type.UPDATE)
             .build());
         return productServiceMapper.toDto(productRepository.save(entity));
     }

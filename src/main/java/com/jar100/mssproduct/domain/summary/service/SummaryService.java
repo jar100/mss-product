@@ -20,9 +20,11 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -42,25 +44,30 @@ public class SummaryService {
         if (ev.getPrice() == null) {
             return false;
         }
-        if (ev.getType() == ProductChangedEvent.Type.DELETE) {
-            Tuple tuple = queryFactory.select(product.price.min(), product.id)
+
+        BrandCategoryKey key = BrandCategoryKey.builder()
+            .brandId(ev.getBrandId())
+            .category(ev.getCategory().name())
+            .build();
+        Optional<BrandCategoryMinPriceSummaryEntity> oldEntity = brandCategoryMinPriceSummaryEntityRepository
+            .findById(key);
+        
+        boolean sameProductIdAndIncreasePrice = oldEntity.isPresent() && oldEntity.get().getMinProductId().equals(ev.getProductId())
+            && oldEntity.get().getMinPrice() < ev.getPrice().intValue();
+        if (ev.getType() == ProductChangedEvent.Type.DELETE || sameProductIdAndIncreasePrice) {
+            Tuple tuple = queryFactory.select(product.price, product.id)
                 .from(product)
                 .where(product.brandId.eq(ev.getBrandId())
                     .and(product.category.eq(ev.getCategory()))
-                    .and(product.id.ne(ev.getProductId())))
+                    .and(product.deleted.isFalse())
+                )
                 .orderBy(product.price.asc())
                 .fetchFirst();
-            Integer newMinPrice = tuple != null ? tuple.get(0, Integer.class) : null;
+            Integer newMinPrice = tuple != null ? Objects.requireNonNull(tuple.get(0, BigDecimal.class)).intValue() : null;
             Long newProductId = tuple != null ? tuple.get(1, Long.class) : null;
 
-            BrandCategoryKey key = BrandCategoryKey.builder()
-                .brandId(ev.getBrandId())
-                .category(ev.getCategory().name())
-                .build();
-
-            Optional<BrandCategoryMinPriceSummaryEntity> byId = brandCategoryMinPriceSummaryEntityRepository.findById(key);
-            if (byId.isPresent()) {
-                BrandCategoryMinPriceSummaryEntity entity = byId.get();
+            if (oldEntity.isPresent()) {
+                BrandCategoryMinPriceSummaryEntity entity = oldEntity.get();
                 if (newMinPrice != null) {
                     entity.updateMinPrice(newProductId, newMinPrice);
                 } else {
@@ -72,15 +79,9 @@ public class SummaryService {
             }
             return false;
         }
+        
 
-        BrandCategoryKey key = BrandCategoryKey.builder()
-            .brandId(ev.getBrandId())
-            .category(ev.getCategory().name())
-            .build();
-
-        BrandCategoryMinPriceSummaryEntity entity = brandCategoryMinPriceSummaryEntityRepository
-            .findById(key)
-            .orElseGet(() -> new BrandCategoryMinPriceSummaryEntity(key, ev.getProductId(), ev.getPrice().intValue()));
+        BrandCategoryMinPriceSummaryEntity entity = oldEntity.orElseGet(() -> new BrandCategoryMinPriceSummaryEntity(key, ev.getProductId(), ev.getPrice().intValue()));
 
         if (entity.getMinPrice() == null || entity.getMinPrice().compareTo(ev.getPrice().intValue()) > 0) {
             entity.updateMinPrice(ev.getProductId(), ev.getPrice().intValue());
@@ -93,20 +94,38 @@ public class SummaryService {
     public boolean updateCategorySummary(ProductChangedEvent ev) {
         if (ev.getType() == ProductChangedEvent.Type.DELETE) {
             // 삭제된 상품의 카테고리 요약 업데이트
-            createCategoryPriceSummary(ev.getCategory());
+            CategoryPriceSummaryEntity categoryPriceSummary = createCategoryPriceSummary(ev.getCategory());
+            if (categoryPriceSummary != null) {
+                categoryPriceSummaryEntityRepository.save(categoryPriceSummary);
+            }
             return true;
         }
 
         // 카테고리 요약이 없으면 생성
         Optional<CategoryPriceSummaryEntity> categoryPriceSummaryEntity = categoryPriceSummaryEntityRepository.findById(ev.getCategory());
         if (categoryPriceSummaryEntity.isEmpty()) {
-            createCategoryPriceSummary(ev.getCategory());
+            CategoryPriceSummaryEntity categoryPriceSummary = createCategoryPriceSummary(ev.getCategory());
+            if (categoryPriceSummary != null) {
+                categoryPriceSummaryEntityRepository.save(categoryPriceSummary);
+            }
+            return true;
         }
         CategoryPriceSummaryEntity entity = categoryPriceSummaryEntity.get();
 
         if ( ((ev.getProductId().equals(entity.getMinProductId()) && ev.getPrice().intValue() > entity.getMinPrice())
             || (ev.getProductId().equals(entity.getMaxProductId()) && ev.getPrice().intValue() < entity.getMaxPrice()))) {
-            createCategoryPriceSummary(ev.getCategory());
+            CategoryPriceSummaryEntity categoryPriceSummary = createCategoryPriceSummary(ev.getCategory());
+            if (categoryPriceSummary != null) {
+                entity.updateMinMaxPrice(
+                    categoryPriceSummary.getMinBrandId(),
+                    categoryPriceSummary.getMinProductId(),
+                    categoryPriceSummary.getMinPrice(),
+                    categoryPriceSummary.getMaxBrandId(),
+                    categoryPriceSummary.getMaxProductId(),
+                    categoryPriceSummary.getMaxPrice()
+                );
+                categoryPriceSummaryEntityRepository.save(entity);
+            }
             return true;
         }
 
@@ -204,13 +223,16 @@ public class SummaryService {
                     JPAExpressions.select(product2.id)
                         .from(product2)
                         .where(product2.brandId.eq(product.brandId)
-                            .and(product2.category.eq(product.category)))
+                            .and(product2.category.eq(product.category))
+                            .and(product2.deleted.isFalse())
+                        )
                         .orderBy(product2.price.asc())
                         .limit(1),
                     // 3) min price 값
                     product.price.min().castToNum(Integer.class))
                 )
                 .from(product)
+                .where(product.deleted.isFalse()) // 삭제된 상품 제외
                 // product2 는 QProductEntity("product2") 로 미리 선언
                 .groupBy(product.brandId, product.category)
                 .fetch();
@@ -298,7 +320,9 @@ public class SummaryService {
                 product.price
             )
             .from(product)
-            .where(product.category.eq(cat))
+            .where(product.category.eq(cat)
+                .and(product.deleted.isFalse())
+            )
             .orderBy(product.price.asc())
             .limit(1)
             .fetchOne();
