@@ -18,6 +18,7 @@ import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -172,8 +173,7 @@ public class SummaryService {
 
     //운영 가정: 브랜드 10,000개 × 상품 50,000건/브랜드 = 약 500백만 건의 상품 데이터가 있다고 가정
     // 데이터 반영이 안됬을 경우에 대비해, 1일 1회 배치로 반영
-    //todo  풀 스켄은 부담이 크므로, 오늘 날짜 기준으로 1일 전 데이터만 반영
-    //@Scheduled(cron = "0 0 1 * * *")
+    @Scheduled(cron = "0 0 1 * * *")
     @Transactional
     public void refreshSummaries() {
         extractedCategoryPriceSummaryEntity();
