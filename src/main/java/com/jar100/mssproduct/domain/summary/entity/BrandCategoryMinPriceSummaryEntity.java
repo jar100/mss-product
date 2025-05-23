@@ -21,10 +21,6 @@ public class BrandCategoryMinPriceSummaryEntity extends BaseEntity {
     @EmbeddedId
     private BrandCategoryKey id;
 
-    @Version
-    @Column(name = "version")
-    private Long version;
-
     /** 최저가 상품 ID */
     @Column(name = "min_product_id", nullable = false)
     private Long minProductId;
@@ -32,4 +28,14 @@ public class BrandCategoryMinPriceSummaryEntity extends BaseEntity {
     /** 최저가 */
     @Column(name = "min_price", nullable = false)
     private Integer minPrice;
+
+    @Version
+    @Column(name = "version")
+    private Long version;
+
+    public BrandCategoryMinPriceSummaryEntity(BrandCategoryKey id, Long minProductId, Integer minPrice) {
+        this.id = id;
+        this.minProductId = minProductId;
+        this.minPrice = minPrice;
+    }
 }

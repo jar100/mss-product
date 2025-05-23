@@ -21,6 +21,8 @@ public class ProductServiceImpl implements ProductService {
     public ProductInfo create(ProductCreation creation) {
         ProductEntity entity = productServiceMapper.toEntity(creation);
         productRepository.save(entity);
+        //event publish 최저가 변경
+
         return productServiceMapper.toDto(entity);
     }
 
@@ -36,6 +38,8 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity entity = productRepository.findById(productUpdate.id())
             .orElseThrow(() -> new ProductNotFoundException("Product not found: " + productUpdate.id()));
         entity.change(productUpdate);
+
+        //event publish 최저가 변경
         return productServiceMapper.toDto(productRepository.save(entity));
     }
 
@@ -45,5 +49,6 @@ public class ProductServiceImpl implements ProductService {
             throw new ProductNotFoundException("Product not found: " + id);
         }
         productRepository.deleteById(id);
+        //event publish 최저가 변경
     }
 }

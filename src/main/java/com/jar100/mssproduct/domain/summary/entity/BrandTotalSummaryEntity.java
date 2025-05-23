@@ -31,8 +31,13 @@ public class BrandTotalSummaryEntity extends BaseEntity {
     @Column(name = "total_price", nullable = false)
     private Integer totalPrice;
 
-
     @Version
     @Column(name = "version")
     private Long version;
+
+    public BrandTotalSummaryEntity(Long id, Long minBrandId, Integer totalPrice) {
+        this.id = id;
+        this.minBrandId = minBrandId;
+        this.totalPrice = totalPrice;
+    }
 }
