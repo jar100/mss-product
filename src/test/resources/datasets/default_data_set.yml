@@ -1,0 +1,645 @@
+brand:
+  - id: 1
+    name: A
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 2
+    name: B
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 3
+    name: C
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 4
+    name: D
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 5
+    name: E
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 6
+    name: F
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 7
+    name: G
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 8
+    name: H
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 9
+    name: I
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+
+product:
+  # Brand A products (1-8)
+  - id: 1
+    brand_id: 1
+    name: TOP_A
+    category: TOP
+    price: 11200
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 2
+    brand_id: 1
+    name: OUTER_A
+    category: OUTER
+    price: 5500
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 3
+    brand_id: 1
+    name: PANTS_A
+    category: PANTS
+    price: 4200
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 4
+    brand_id: 1
+    name: SNEAKERS_A
+    category: SNEAKERS
+    price: 9000
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 5
+    brand_id: 1
+    name: BAG_A
+    category: BAG
+    price: 2000
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 6
+    brand_id: 1
+    name: HAT_A
+    category: HAT
+    price: 1700
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 7
+    brand_id: 1
+    name: SOCKS_A
+    category: SOCKS
+    price: 1800
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 8
+    brand_id: 1
+    name: ACCESSORY_A
+    category: ACCESSORY
+    price: 2300
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+
+  # Brand B products (9-16)
+  - id: 9
+    brand_id: 2
+    name: TOP_B
+    category: TOP
+    price: 10500
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 10
+    brand_id: 2
+    name: OUTER_B
+    category: OUTER
+    price: 5900
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 11
+    brand_id: 2
+    name: PANTS_B
+    category: PANTS
+    price: 3800
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 12
+    brand_id: 2
+    name: SNEAKERS_B
+    category: SNEAKERS
+    price: 9100
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 13
+    brand_id: 2
+    name: BAG_B
+    category: BAG
+    price: 2100
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 14
+    brand_id: 2
+    name: HAT_B
+    category: HAT
+    price: 2000
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 15
+    brand_id: 2
+    name: SOCKS_B
+    category: SOCKS
+    price: 2000
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 16
+    brand_id: 2
+    name: ACCESSORY_B
+    category: ACCESSORY
+    price: 2200
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+
+  # Brand C products (17-24)
+  - id: 17
+    brand_id: 3
+    name: TOP_C
+    category: TOP
+    price: 10000
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 18
+    brand_id: 3
+    name: OUTER_C
+    category: OUTER
+    price: 6200
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 19
+    brand_id: 3
+    name: PANTS_C
+    category: PANTS
+    price: 3300
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 20
+    brand_id: 3
+    name: SNEAKERS_C
+    category: SNEAKERS
+    price: 9200
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 21
+    brand_id: 3
+    name: BAG_C
+    category: BAG
+    price: 2200
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 22
+    brand_id: 3
+    name: HAT_C
+    category: HAT
+    price: 1900
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 23
+    brand_id: 3
+    name: SOCKS_C
+    category: SOCKS
+    price: 2200
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 24
+    brand_id: 3
+    name: ACCESSORY_C
+    category: ACCESSORY
+    price: 2100
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+
+  # Brand D products (25-32)
+  - id: 25
+    brand_id: 4
+    name: TOP_D
+    category: TOP
+    price: 10100
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 26
+    brand_id: 4
+    name: OUTER_D
+    category: OUTER
+    price: 5100
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 27
+    brand_id: 4
+    name: PANTS_D
+    category: PANTS
+    price: 3000
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 28
+    brand_id: 4
+    name: SNEAKERS_D
+    category: SNEAKERS
+    price: 9500
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 29
+    brand_id: 4
+    name: BAG_D
+    category: BAG
+    price: 2500
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 30
+    brand_id: 4
+    name: HAT_D
+    category: HAT
+    price: 1500
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 31
+    brand_id: 4
+    name: SOCKS_D
+    category: SOCKS
+    price: 2400
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 32
+    brand_id: 4
+    name: ACCESSORY_D
+    category: ACCESSORY
+    price: 2500
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+
+  # Brand E products (33-40)
+  - id: 33
+    brand_id: 5
+    name: TOP_E
+    category: TOP
+    price: 10200
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 34
+    brand_id: 5
+    name: OUTER_E
+    category: OUTER
+    price: 5200
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 35
+    brand_id: 5
+    name: PANTS_E
+    category: PANTS
+    price: 3100
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 36
+    brand_id: 5
+    name: SNEAKERS_E
+    category: SNEAKERS
+    price: 9600
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 37
+    brand_id: 5
+    name: BAG_E
+    category: BAG
+    price: 2600
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 38
+    brand_id: 5
+    name: HAT_E
+    category: HAT
+    price: 1600
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 39
+    brand_id: 5
+    name: SOCKS_E
+    category: SOCKS
+    price: 2500
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 40
+    brand_id: 5
+    name: ACCESSORY_E
+    category: ACCESSORY
+    price: 2600
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+
+    # Brand F products (41-48)
+  - id: 41
+    brand_id: 6
+    name: TOP_F
+    category: TOP
+    price: 10300
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 42
+    brand_id: 6
+    name: OUTER_F
+    category: OUTER
+    price: 5300
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 43
+    brand_id: 6
+    name: PANTS_F
+    category: PANTS
+    price: 3200
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 44
+    brand_id: 6
+    name: SNEAKERS_F
+    category: SNEAKERS
+    price: 9700
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 45
+    brand_id: 6
+    name: BAG_F
+    category: BAG
+    price: 2700
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 46
+    brand_id: 6
+    name: HAT_F
+    category: HAT
+    price: 1700
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 47
+    brand_id: 6
+    name: SOCKS_F
+    category: SOCKS
+    price: 2600
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 48
+    brand_id: 6
+    name: ACCESSORY_F
+    category: ACCESSORY
+    price: 2700
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+
+  # Brand G products (49-56)
+  - id: 49
+    brand_id: 7
+    name: TOP_G
+    category: TOP
+    price: 10400
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 50
+    brand_id: 7
+    name: OUTER_G
+    category: OUTER
+    price: 5400
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 51
+    brand_id: 7
+    name: PANTS_G
+    category: PANTS
+    price: 3300
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 52
+    brand_id: 7
+    name: SNEAKERS_G
+    category: SNEAKERS
+    price: 9800
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 53
+    brand_id: 7
+    name: BAG_G
+    category: BAG
+    price: 2800
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 54
+    brand_id: 7
+    name: HAT_G
+    category: HAT
+    price: 1800
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 55
+    brand_id: 7
+    name: SOCKS_G
+    category: SOCKS
+    price: 2700
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 56
+    brand_id: 7
+    name: ACCESSORY_G
+    category: ACCESSORY
+    price: 2800
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+
+  # Brand H products (57-64)
+  - id: 57
+    brand_id: 8
+    name: TOP_H
+    category: TOP
+    price: 10500
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 58
+    brand_id: 8
+    name: OUTER_H
+    category: OUTER
+    price: 5500
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 59
+    brand_id: 8
+    name: PANTS_H
+    category: PANTS
+    price: 3400
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 60
+    brand_id: 8
+    name: SNEAKERS_H
+    category: SNEAKERS
+    price: 9900
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 61
+    brand_id: 8
+    name: BAG_H
+    category: BAG
+    price: 2900
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 62
+    brand_id: 8
+    name: HAT_H
+    category: HAT
+    price: 1900
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 63
+    brand_id: 8
+    name: SOCKS_H
+    category: SOCKS
+    price: 2800
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 64
+    brand_id: 8
+    name: ACCESSORY_H
+    category: ACCESSORY
+    price: 2900
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+
+  # Brand I products (65-72)
+  - id: 65
+    brand_id: 9
+    name: TOP_I
+    category: TOP
+    price: 10600
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 66
+    brand_id: 9
+    name: OUTER_I
+    category: OUTER
+    price: 5600
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 67
+    brand_id: 9
+    name: PANTS_I
+    category: PANTS
+    price: 3500
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 68
+    brand_id: 9
+    name: SNEAKERS_I
+    category: SNEAKERS
+    price: 10000
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 69
+    brand_id: 9
+    name: BAG_I
+    category: BAG
+    price: 3000
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 70
+    brand_id: 9
+    name: HAT_I
+    category: HAT
+    price: 2000
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 71
+    brand_id: 9
+    name: SOCKS_I
+    category: SOCKS
+    price: 2900
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+  - id: 72
+    brand_id: 9
+    name: ACCESSORY_I
+    category: ACCESSORY
+    price: 3000
+    deleted: false
+    created_at: 2025-05-22 00:00:00
+    updated_at: 2025-05-22 00:00:00
+
+
+
+

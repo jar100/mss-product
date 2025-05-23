@@ -1,5 +1,6 @@
 package com.jar100.mssproduct.domain.product.dto;
 
+import com.jar100.mssproduct.common.dto.Category;
 import lombok.Builder;
 
 @Builder
