@@ -196,6 +196,9 @@ curl http://localhost:8080/api/v1/prices/categories/lowest
 }
 ```
 
+### 테스트
+[test_script.http](src/main/resources/test_script.http) 파일을 통해 Postman과 같은 HTTP 클라이언트에서 테스트할 수 있습니다.
+
 ---
 
 

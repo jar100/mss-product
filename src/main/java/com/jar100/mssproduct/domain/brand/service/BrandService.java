@@ -17,4 +17,6 @@ public interface BrandService {
     void delete(Long brandId);
 
     List<BrandInfo> listAll();
+
+    BrandInfo findBy(Long id);
 }

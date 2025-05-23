@@ -1,21 +1,29 @@
 package com.jar100.mssproduct.domain.summary.repository;
 
 import com.jar100.mssproduct.common.dto.Category;
+import com.jar100.mssproduct.common.dto.ProductChangedEvent;
 import com.jar100.mssproduct.domain.brand.entity.QBrandEntity;
+import com.jar100.mssproduct.domain.product.entity.QProductEntity;
 import com.jar100.mssproduct.domain.summary.dto.BrandTotalPrice;
 import com.jar100.mssproduct.domain.summary.dto.CategoryMinPrice;
 import com.jar100.mssproduct.domain.summary.dto.CategoryPriceRange;
+import com.jar100.mssproduct.domain.summary.entity.BrandCategoryKey;
+import com.jar100.mssproduct.domain.summary.entity.BrandCategoryMinPriceSummaryEntity;
 import com.jar100.mssproduct.domain.summary.entity.BrandTotalSummaryEntity;
+import com.jar100.mssproduct.domain.summary.entity.CategoryPriceSummaryEntity;
 import com.jar100.mssproduct.domain.summary.entity.QBrandCategoryMinPriceSummaryEntity;
 import com.jar100.mssproduct.domain.summary.entity.QBrandTotalSummaryEntity;
 import com.jar100.mssproduct.domain.summary.entity.QCategoryPriceSummaryEntity;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import static com.querydsl.core.group.GroupBy.groupBy;
 import static com.querydsl.core.types.dsl.Expressions.list;
@@ -115,4 +123,6 @@ public class PriceQueryRepositoryImpl implements PriceQueryRepository {
             .max(maxList)
             .build();
     }
+
+
 }

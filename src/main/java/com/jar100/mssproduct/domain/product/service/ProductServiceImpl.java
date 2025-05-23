@@ -30,6 +30,7 @@ public class ProductServiceImpl implements ProductService {
             .brandId(entity.getBrandId())
             .category(entity.getCategory())
             .price(entity.getPrice())
+            .type(ProductChangedEvent.Type.CREATE)
             .build());
         return productServiceMapper.toDto(entity);
     }
@@ -53,19 +54,22 @@ public class ProductServiceImpl implements ProductService {
             .brandId(entity.getBrandId())
             .category(entity.getCategory())
             .price(entity.getPrice())
+            .type(ProductChangedEvent.Type.UPDATE)
             .build());
         return productServiceMapper.toDto(productRepository.save(entity));
     }
 
     @Override
     public void delete(Long id) {
-        if (!productRepository.existsById(id)) {
-            throw new ProductNotFoundException("Product not found: " + id);
-        }
+        ProductEntity productEntity = productRepository.findById(id)
+            .orElseThrow(() -> new ProductNotFoundException("Product not found: " + id));
         productRepository.deleteById(id);
         //event publish 최저가 변경
         publisher.publishEvent(ProductChangedEvent.builder()
-            .productId(id)
+            .productId(productEntity.getId())
+            .brandId(productEntity.getBrandId())
+            .category(productEntity.getCategory())
+            .price(productEntity.getPrice())
             .type(ProductChangedEvent.Type.DELETE)
             .build());
     }

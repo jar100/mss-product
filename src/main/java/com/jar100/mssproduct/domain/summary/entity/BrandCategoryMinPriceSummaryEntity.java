@@ -38,4 +38,9 @@ public class BrandCategoryMinPriceSummaryEntity extends BaseEntity {
         this.minProductId = minProductId;
         this.minPrice = minPrice;
     }
+
+    public void updateMinPrice(Long minProductId, Integer minPrice) {
+        this.minProductId = minProductId;
+        this.minPrice = minPrice;
+    }
 }

@@ -3,11 +3,15 @@ package com.jar100.mssproduct.domain.summary.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+@Builder
+@EqualsAndHashCode
 @Embeddable
 @Getter
 @NoArgsConstructor

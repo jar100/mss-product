@@ -33,6 +33,12 @@ public class BrandController {
         return CommonResponse.success(mapper.toResponse(info));
     }
 
+    @GetMapping("/{id}")
+    public CommonResponse<BrandDto> get(@PathVariable Long id) {
+        BrandInfo info = service.findBy(id);
+        return CommonResponse.success(mapper.toResponse(info));
+    }
+
     @PutMapping("/{id}")
     public CommonResponse<BrandDto> update(@PathVariable Long id, @RequestBody @Valid BrandUpdateRequest request
     ) {

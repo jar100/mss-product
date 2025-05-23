@@ -55,4 +55,11 @@ public class BrandServiceImpl implements BrandService {
             .map(brandMapper::toDto)
             .collect(Collectors.toList());
     }
+
+    @Override
+    public BrandInfo findBy(Long id) {
+        BrandEntity entity = brandRepository.findById(id)
+            .orElseThrow(() -> new BrandNotFoundException("Brand not found: " + id));
+        return brandMapper.toDto(entity);
+    }
 }
