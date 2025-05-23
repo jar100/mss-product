@@ -24,13 +24,26 @@
 
 ---
 
-### 설계 키 포인트
+### 설계 포인트
 
-* **ID-only 참조**: Entity 간 연관관계 대신 각 entity는 식별자(`brandId`)만 보유
-* **도메인 간 간접 참조**: Reader 인터페이스 + DTO 패턴으로 서비스 간 의존성 통제
-* **조인 조회**: QueryDSL을 활용하여 projection DTO로 결과 반환
-* **캐싱 전략**: 상품 조회 API 성능 최적화를 위해 Spring Cache(Ehcache) 적용
-* **카테고리** : enum으로 정의하여 관리합니다.  
+* **ID-only 참조**: Entity 간 연관관계 대신 각 Entity는 식별자(`brandId`)만 보유해서 도메인 간 결합도를 최소화합니다.
+* **조인 조회**: QueryDSL을 활용해 Projection DTO로 필요한 필드만 조회하여 메모리 오버헤드를 절감합니다.
+* **카테고리 관리**: 카테고리 변경 가능성이 낮다는 판단 하에 Enum으로 관리하여 코드 가독성과 안정성을 확보합니다.
+* **Summary Tables**: 대용량 상품 데이터를 효율적으로 집계·조회하기 위해 3개의 요약 테이블을 사용합니다:
+
+    * `brand_category_min_price_summary` - 브랜드×카테고리별 최소가를 저장
+    * `category_price_summary`          - 카테고리별 최소·최대가를 저장
+    * `brand_total_summary`             - 단일 브랜드 구매 시 총액 최소 브랜드를 저장
+
+  **생성 사유 및 처리 방식**:
+
+    * 운영 가정: 브랜드 10,000개 × 상품 50,000건/브랜드 = 약 5억 건의 상품 데이터
+
+        * 실제 [MUSINSA 브랜드는 2024 기준 8,500개](https://newsroom.musinsa.com/newsroom-menu/2025-0430-01)
+        * 실제 무신사 노출된 Adidas 상품 수는 2,500건 이상
+    * 매번 실시간 쿼리 불가 → **일 배치**로 요약 테이블 생성 및 저장
+    * 상품 생성/수정/삭제 시 **비동기 이벤트**로 해당 요약 테이블 부분 갱신
+    * 배치 스케줄러(`@Scheduled`)가 **매시간** 전체 요약 재계산으로 데이터 정합성 확보
 
 #### 패키지 구조
 ```
@@ -39,22 +52,11 @@ com.jar100.mssproduct
 ├── domain
 │   ├── brand
 │   ├── product
-│   └── price
+│   └── summary
 ├── common            # 예외, 응답 DTO, 유틸
 ├── config            # 설정 (JPA, QueryDSL, H2 등)
 └── MssProductApplication.java
 ```
-
-### 카테고리별 최저가 쿼리 최적화
-- 운영 가정: 브랜드 10,000개 × 상품 50,000건/브랜드 = 약 500백만 건의 상품 데이터가 있다고 가정
-  - 실제 [MUSINSA 브랜드는 2024 기준 8500개](https://newsroom.musinsa.com/newsroom-menu/2025-0430-01)
-  - 실제 무신사 등록된 아디다스 노출 상품 수는 2,500건 이상   
-- 단일 상관 서브쿼리 방식은 전체 테이블(인덱스) 풀 스캔 후 임시 테이블 생성 및 조인이 필요해 비용이 매우 큼
-- 대신 **카테고리당 LIMIT 1 × 8회** 방식으로,
-   - `(category, price)` 인덱스를 타고 각 카테고리에서 **O(log N)** 범위 스캔 후 첫 번째(최저가) 레코드를 즉시 가져옴
-   - 네트워크 왕복 8회는 카테고리 수(8)로 고정된 상수이므로 전체 지연에 미미한 영향
-   - 500M건 규모에서도 8회 경량 쿼리를 통해 안정적이고 예측 가능한 성능 보장
-위 이유로 `PriceQueryRepositoryImpl#findMinPriceByCategory()`를 서브쿼리 대신 8회 LIMIT 조회 방식으로 구현했습니다.
 ---
 
 ## 코드 빌드 · 테스트 · 실행 방법
@@ -101,8 +103,99 @@ java -jar backend/build/libs/mss-product-0.0.1-SNAPSHOT.jar
 
 ---
 
-## 기타 추가 정보
-todo
+## API Reference
+
+### Brand APIs
+
+| Operation           | Method | Path                  | Description                 |
+| ------------------- | ------ | --------------------- | --------------------------- |
+| Create Brand        | POST   | `/api/v1/brands`      | 브랜드 생성                      |
+| Get All Brands      | GET    | `/api/v1/brands`      | 모든 브랜드 목록 조회                |
+| Get Brand by ID     | GET    | `/api/v1/brands/{id}` | 단일 브랜드 조회                   |
+| Update Brand        | PUT    | `/api/v1/brands/{id}` | 브랜드 정보 수정                   |
+| Delete Brand (soft) | DELETE | `/api/v1/brands/{id}` | 브랜드 소프트 삭제 (`deleted=true`) |
+
+#### Example: Create Brand
+
+```bash
+curl -X POST http://localhost:8080/api/v1/brands \
+  -H "Content-Type: application/json" \
+  -d '{"name":"A"}'
+```
+
+**Response**
+
+```json
+{
+  "result": "SUCCESS",
+  "data": { "id": 1, "name": "A" }
+}
+```
+
+### Product APIs
+
+| Operation             | Method | Path                    | Description                |
+| --------------------- | ------ | ----------------------- | -------------------------- |
+| Create Product        | POST   | `/api/v1/products`      | 상품 생성                      |
+| Get Product by ID     | GET    | `/api/v1/products/{id}` | 단일 상품 조회                   |
+| Update Product        | PUT    | `/api/v1/products/{id}` | 상품 정보 수정                   |
+| Delete Product (soft) | DELETE | `/api/v1/products/{id}` | 상품 소프트 삭제 (`deleted=true`) |
+
+#### Example: Create Product
+
+```bash
+curl -X POST http://localhost:8080/api/v1/products \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "TOP_A",
+    "brandId": 1,
+    "category": "TOP",
+    "price": 11200
+  }'
+```
+
+**Response**
+
+```json
+{
+  "result":"SUCCESS",
+  "data":{
+    "id":101,
+    "name":"TOP_A",
+    "brandId":1,
+    "category":"TOP",
+    "price":11200
+  }
+}
+```
+
+### Price APIs
+
+| Operation                            | Method | Path                                         | Description                             |
+| ------------------------------------ | ------ | -------------------------------------------- | --------------------------------------- |
+| Get Category Lowest Prices           | GET    | `/api/v1/prices/categories/lowest`           | 각 카테고리별 최저 가격 브랜드 및 가격 목록 조회            |
+| Get Single Brand Lowest Total        | GET    | `/api/v1/prices/brands/lowest-total`         | 모든 카테고리 상품 구매 시 총액 최소 브랜드 및 카테고리별 가격 조회 |
+| Get Category Price Range (min & max) | GET    | `/api/v1/prices/categories/{category}/range` | 지정된 카테고리의 최소·최대 가격 브랜드 및 가격 조회          |
+
+#### Example: Get Category Lowest Prices
+
+```bash
+curl http://localhost:8080/api/v1/prices/categories/lowest
+```
+
+**Response**
+
+```json
+{
+  "result":"SUCCESS",
+  "data":[
+    {"category":"TOP","brand":"C","price":10000},
+    {"category":"OUTER","brand":"E","price":5000},
+    …
+  ]
+}
+```
+
 ---
 
 
